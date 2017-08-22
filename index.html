@@ -11,9 +11,6 @@
     height: 100%;
     width: 100%;
   }
-</style>
-  <link rel="stylesheet" href="https://js.arcgis.com/4.3/esri/css/main.css">
-<script src="https://js.arcgis.com/4.3/"></script>
 <!-- Load Leaflet from CDN-->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
   integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
@@ -90,7 +87,6 @@ function changeBasemap(basemaps){
   setBasemap(basemap);
 }
 
-  <script>
 require([
   "esri/Map",
   "esri/views/MapView",
@@ -184,7 +180,8 @@ require([
     zoom: 9
   });
 
-});</script>
+});
+</script>
 </head>
 <body>
   <div id="viewDiv"></div>
