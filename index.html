@@ -1,7 +1,7 @@
 <<html>
 <head>
   <meta charset=utf-8 />
-  <title>Testing Web Apps</title>
+  <title>Vector Basemaps</title>
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
 
@@ -64,7 +64,7 @@
 </div>
 
 <script>
-  var map = L.map('map').setView([-99.165, 39.645], 50);
+  var map = L.map('map').setView([40, -4], 6);
   var layer = L.esri.Vector.basemap('Newspaper').addTo(map);
 
   function setBasemap(basemap) {
