@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>DevLabs - Create a 2D map with a layer</title>
+<title>Web Map Example</title>
 <style>
   html, body, #viewDiv {
     padding: 0;
@@ -14,7 +14,7 @@
 </style>
   <link rel="stylesheet" href="https://js.arcgis.com/4.3/esri/css/main.css">
 <script src="https://js.arcgis.com/4.3/"></script>
-  
+
   <script>
 require([
   "esri/Map",
@@ -23,7 +23,7 @@ require([
   "esri/renderers/UniqueValueRenderer",
   "dojo/domReady!"
 ], function(Map, MapView, FeatureLayer, UniqueValueRenderer) {
-  
+
   var map = new Map({
     basemap: "topo-vector"
   });
@@ -50,7 +50,7 @@ require([
     },
     definitionExpression: "ELEV_GAIN < 250"
   });
-  
+
   var renderer = UniqueValueRenderer.fromJSON({
       "type": "uniqueValue",
       "field1": "USE_BIKE",
@@ -87,10 +87,10 @@ require([
         }
       ]
     });
-  
+
   featureLayer2.renderer = renderer;
   map.add(featureLayer2);
-  
+
   // Trail Heads (Points)
   var featureLayer3 = new FeatureLayer({
     url: "https://services3.arcgis.com/GVgbJbqm8hXASVYi/arcgis/rest/services/Trailheads/FeatureServer",
@@ -103,10 +103,10 @@ require([
   map.add(featureLayer3);
 
   var view = new MapView({
-    container: "viewDiv",  
+    container: "viewDiv",
     map: map,
     center: [-118.35,34.05],
-    zoom: 9                  
+    zoom: 9
   });
 
 });</script>
@@ -114,4 +114,4 @@ require([
 <body>
   <div id="viewDiv"></div>
 </body>
-</html> 
+</html>
