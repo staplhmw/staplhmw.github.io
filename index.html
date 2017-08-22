@@ -1,29 +1,29 @@
-<!DOCTYPE html>
-<html>
+<<html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>Web Map Example</title>
-
-<-- Load Leaflet from CDN-->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
-  integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
-  crossorigin=""/>
-<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
-  integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
-  crossorigin=""></script>
+  <meta charset=utf-8 />
+  <title>Vector Basemaps</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
 
-<!-- Load Esri Leaflet from CDN -->
-<script src="https://unpkg.com/esri-leaflet@2.1.0/dist/esri-leaflet.js"
-  integrity="sha512-Tojl3UMd387f6DdAJlo+fKfJZiP55fYT+6Y58yKbHydnueOdSFOxrgLPuUxm7VW1szEt3hZVwv3V2sSUCuT35w=="
-  crossorigin=""></script>
+  <!-- Load Leaflet from CDN-->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+    integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+    crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
+    integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
+    crossorigin=""></script>
 
 
-<style>
-  body { margin:0; padding:0; }
-  #map { position: absolute; top:0; bottom:0; right:0; left:0; }
-</style>
+  <!-- Load Esri Leaflet from CDN -->
+  <script src="https://unpkg.com/esri-leaflet@2.1.0/dist/esri-leaflet.js"
+    integrity="sha512-Tojl3UMd387f6DdAJlo+fKfJZiP55fYT+6Y58yKbHydnueOdSFOxrgLPuUxm7VW1szEt3hZVwv3V2sSUCuT35w=="
+    crossorigin=""></script>
+
+
+  <style>
+    body { margin:0; padding:0; }
+    #map { position: absolute; top:0; bottom:0; right:0; left:0; }
+  </style>
 </head>
 <body>
 
@@ -31,153 +31,56 @@
 <script src="https://unpkg.com/esri-leaflet-vector"></script>
 
 <style>
-#basemaps-wrapper {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  z-index: 400;
-  background: white;
-  padding: 10px;
-}
-#basemaps {
-  margin-bottom: 5px;
-}
+  #basemaps-wrapper {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 400;
+    background: white;
+    padding: 10px;
+  }
+  #basemaps {
+    margin-bottom: 5px;
+  }
 </style>
 
 <div id="map"></div>
 
 <div id="basemaps-wrapper" class="leaflet-bar">
-<select name="basemaps" id="basemaps" onChange="changeBasemap(basemaps)">
-  <option value="Newspaper">Newspaper</option>
-  <option value="ModernAntique">ModernAntique</option>
-  <option value="BlackAndWhite">BlackAndWhite</option>
-  <option value="Spring">Spring</option>
-  <option value="MidCentury">Mid-Century</option>
-  <option value="Topographic">Topographic</option>
-  <option value="Gray">Gray</option>
-  <option value="DarkGray">Dark Gray</option>
-  <option value="Navigation">Navigation</option>
-  <option value="Streets">Streets</option>
-  <option value="StreetsNight">Streets Night</option>
-  <option value="StreetsRelief">Streets Relief</option>
-</select>
+  <select name="basemaps" id="basemaps" onChange="changeBasemap(basemaps)">
+    <option value="Newspaper">Newspaper</option>
+    <option value="ModernAntique">ModernAntique</option>
+    <option value="BlackAndWhite">BlackAndWhite</option>
+    <option value="Spring">Spring</option>
+    <option value="MidCentury">Mid-Century</option>
+    <option value="Topographic">Topographic</option>
+    <option value="Gray">Gray</option>
+    <option value="DarkGray">Dark Gray</option>
+    <option value="Navigation">Navigation</option>
+    <option value="Streets">Streets</option>
+    <option value="StreetsNight">Streets Night</option>
+    <option value="StreetsRelief">Streets Relief</option>
+  </select>
 </div>
 
 <script>
-var map = L.map('map').setView([40, -4], 6);
-var layer = L.esri.Vector.basemap('Newspaper').addTo(map);
+  var map = L.map('map').setView([40, -4], 6);
+  var layer = L.esri.Vector.basemap('Newspaper').addTo(map);
 
-function setBasemap(basemap) {
-  if (layer) {
-    map.removeLayer(layer);
+  function setBasemap(basemap) {
+    if (layer) {
+      map.removeLayer(layer);
+    }
+
+    layer = L.esri.Vector.basemap(basemap);
+    map.addLayer(layer);
   }
 
-  layer = L.esri.Vector.basemap(basemap);
-  map.addLayer(layer);
-}
-
-function changeBasemap(basemaps){
-  var basemap = basemaps.value;
-  setBasemap(basemap);
-}
-
-require([
-  "esri/Map",
-  "esri/views/MapView",
-  "esri/layers/FeatureLayer",
-  "esri/renderers/UniqueValueRenderer",
-  "dojo/domReady!"
-], function(Map, MapView, FeatureLayer, UniqueValueRenderer) {
-
-  var map = new Map({
-    basemap: "topo-vector"
-  });
-
-  // Park and Open Space (Polygons)
-  /*var featureLayer = new FeatureLayer({
-    url: "https://services3.arcgis.com/GVgbJbqm8hXASVYi/arcgis/rest/services/Parks_and_Open_Space/FeatureServer",
-    outFields: ["*"],
-    popupTemplate: {
-      title: "{PARK_NAME}",
-      content: "{*}"
-    }
-  });
-  map.add(featureLayer);
-  */
-
-  // Trails (Lines)
-  var featureLayer2 = new FeatureLayer({
-    url: "https://services3.arcgis.com/GVgbJbqm8hXASVYi/arcgis/rest/services/Trails/FeatureServer",
-    outFields: ["*"],
-    popupTemplate: {
-      title: "{TRL_NAME}",
-      content: "{*}"
-    },
-    definitionExpression: "ELEV_GAIN < 250"
-  });
-
-  var renderer = UniqueValueRenderer.fromJSON({
-      "type": "uniqueValue",
-      "field1": "USE_BIKE",
-      "uniqueValueInfos": [
-        {
-          "value": "Yes",
-          "label": "Yes",
-          "symbol": {
-            "color": [
-              0,
-              112,
-              255,
-              255
-            ],
-            "width": 1.5,
-            "type": "esriSLS",
-            "style": "esriSLSSolid"
-          }
-        },
-        {
-          "value": "No",
-          "label": "No",
-          "symbol": {
-            "color": [
-              20,
-              0,
-              0,
-              0
-            ],
-            "width": 1.5,
-            "type": "esriSLS",
-            "style": "esriSLSSolid"
-          }
-        }
-      ]
-    });
-
-  featureLayer2.renderer = renderer;
-  map.add(featureLayer2);
-
-  // Trail Heads (Points)
-  var featureLayer3 = new FeatureLayer({
-    url: "https://services3.arcgis.com/GVgbJbqm8hXASVYi/arcgis/rest/services/Trailheads/FeatureServer",
-    outFields: ["TRL_NAME","CITY_JUR", "LAT", "LON"],
-    popupTemplate: {
-      title: "{TRL_NAME}",
-      content: "This trail is in {CITY_JUR} and located at {LAT}, {LON}."
-    }
-  });
-  map.add(featureLayer3);
-
-  var view = new MapView({
-    container: "viewDiv",
-    map: map,
-    center: [-118.35,34.05],
-    zoom: 9
-  });
-
-});
+  function changeBasemap(basemaps){
+    var basemap = basemaps.value;
+    setBasemap(basemap);
+  }
 </script>
-</head>
-<body>
-  <div id="viewDiv"></div>
+
 </body>
 </html>
